@@ -238,7 +238,7 @@ a:focus {
 }
 @media (min-width: 767px) {
   .content-section {
-    padding-top: 250px;
+    padding-top: 150px;
   }
   .download-section {
     padding: 100px 0;
@@ -311,4 +311,9 @@ img::-moz-selection {
 }
 body {
   webkit-tap-highlight-color: rgba(255, 255, 255, 0.2);
+}
+/*  my code */
+.text-stroke {
+  -webkit-text-stroke-width:2px;
+  -webkit-text-stroke-color:#666;
 }
