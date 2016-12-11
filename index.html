@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 
     <!-- Theme CSS -->
-    <link href="css/grayscale.min.css" rel="stylesheet">
+    <link href="css/grayscale.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,8 +41,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <h1 class="brand-heading">Star Wars</h1>
-                        <p class="intro-text">An Analysis of popular GitHub repositories</p>
+                        <h1 class="brand-heading text-stroke">Star <i class="fa fa-star" aria-hidden="true"></i> Wars</h1>
+                        <h1 class="brand-heading text-stroke" style="text-transform: none; font-size: 40px;">An Analysis of Popular GitHub Repositories</h1>
+                        <p class="intro-text" style="font-size: 20px;">By Ellen Stanfill, Himank Yadav, Juliang Li, Rafa Moreno</p>
                         <a href="#about" class="btn btn-circle page-scroll">
                             <i class="fa fa-angle-double-down animated"></i>
                         </a>
@@ -56,44 +57,228 @@
     <section id="about" class="container content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-                <h2>About Grayscale</h2>
-                <p>Grayscale is a free Bootstrap 3 theme created by Start Bootstrap. It can be yours right now, simply download the template on <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
-                <p>This theme features stock photos by <a href="http://gratisography.com/">Gratisography</a> along with a custom Google Maps skin courtesy of <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
-                <p>Grayscale includes full HTML, CSS, and custom JavaScript files along with LESS files for easy customization.</p>
+                <h2>About Star Wars</h2>
+                <p>
+                  We aim to analyze popular GitHub repositories and find the
+                  common traits and correlations with different parameters among
+                  them.
+                </p>
+                <p>
+                  Contributions in open source have really moved forward with
+                  platforms like Github and bitbucket. This recent trend has
+                  allowed for large databases that run software programs to
+                  be published openly, and also allows for people from all over
+                  the world to contribute to the code base. With Open Source
+                  being so prevalent in the technology culture, we decided to
+                  analyze some of the most popular Github profiles to find
+                  trends that might help provoke what makes these projects
+                  so popular, and also find trends in technologies that
+                  software engineers are using these days.
+                </p>
+                <a href="#data-collection" class="btn btn-circle page-scroll">
+                    <i class="fa fa-angle-double-down animated"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="data-collection" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>Data Collection</h2>
+                <p>
+                  We initially used the API provided by GitHub to get the data. However, the limited rate per hour quickly became problematic for us.
+                </p>
+                <p>
+                  In order to avoid the rate limited problem, we used beautifulsoup to scrape the GitHub repository pages to get the relevant data we needed.
+                </p>
+                <p>
+                  Web scraping in one machine for large amount of data is not feasible. Hence, we leveraged Google Cloud platform to distribute the loads and used Twillio API to notify us when something happened while the processes were running in the cloud.
+                </p>
+                <p>
+                  After that, we had data in many separated files. To ease our analysis effort, we combined them into one single JSON file.
+                </p>
+                <p>
+                  Now we have the data, it's time to clean it up. This dataset contains lots of outliers. For example, the Linux repository is one of the most popular and most well-known code bases. However, it has infinitely many contributors and can mess with our analysis. Therefore, we try to single out all the outliers. This cuts the number of repositories almost by half.
+                </p>
+                <a href="#data-Analysis" class="btn btn-circle page-scroll">
+                    <i class="fa fa-angle-double-down animated"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="data-Analysis" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>Data Analysis</h2>
+                <h3>Legitness</h3>
+                  <p>
+                    GitHub is supposed to be an open-source code sharing platform. However, we found that lots of popular repositories don't even contain a single line of code. Most of them are tutorials or best practices for certain frameworks or languages. We think these repos are still very valuable but we believe there must be some traits these repos have that the actual code-based repos don't. Therefore, we want to investigate this issue.
+                  </p>
+                  <p>
+                    It turns out that
+                    There are  492  repos that contain code and 41  repos that don't have a single line of code.
+                  </p>
+                  <div class='white-container'>
+                    <img src='./img/legit1.png'></img>
+                  </div>
+                  <div class='white-container'>
+                    <img src='./img/legit2.png'></img>
+                  </div>
+                  <p>
+                    Based on our analysis, there are lots of differences between repos that contain code (legit repos) and repos that don't (non-legit repos). For instance, legit repos have more than twice as many branches and commits. In addition to those, legit repos have more than 3 times as many open issues and milestones. Non-legit repos have far smaller sizes than legit repos, since most of them only have texts or links to other contents. Nonetheless, on average, non-legit repos do receive slightly more attention than the legit ones as they have more stars/watchers.
+                  </p>
+                  <p>
+                    There are distinct differences in the repos based on the legitness, so we built a decision tree classifier to help us determine if a repo is legit or not.
+                    We used half the dataset as training set and the other half as testing set. Our model was able to
+                    predict 243  out of  266  repositories correctly with score = 0.910112359551.
+                  </p>
+                  <h3>Languages</h3>
+                    <p>We are interested in knowing what languages these popular repos use to see if choosing the primary languages for a repo is important to the stars count. First, we will investigate the primary languages of each repository - that is, the language which composes the largest percentage of the code in each repository.</p>
+                  <div class='white-container'>
+                    <img src='./img/language1.png'></img>
+                  </div>
+                  <p>Javascript is the most popular primary language used by all the repos in the dataset. 47.6% of repos use mostly Javascript. All of the top 10 languages are fairly well-known and widespread in academia and industry. This is expected, as people would contribute or look at repos written in common languages.
+But what are the most unpopular languages used by the popular repos?</p>
+                  <p>Most unpopular languages used by popular repos are </p>
+                    <p>1.Haskell</br>
+                      2.Batchfile</br>
+                      3.Crystal</br>
+                      4.TeX</br>
+                      5.Makefile</br>
+                      6.XSLT</br>
+                      7.Vue</br>
+                      8.Assembly</br>
+                      9.Perl</br>
+                      10.ApacheConf</br>
+                    </p>
+                  <p>
+                    Unsurprisingly, the pure, lazy and functional language Haskell takes the crown of being the least popular language.
+                    What are the top frequently used languages by popular repos?
+                  </p>
+                  <div class='white-container'>
+                    <img src='./img/language2.png'></img>
+                  </div>
+                  <p>
+                    We can clearly see that most of those popular repos must have something to do with websites since the web languages such as HTML, CSS and JavaScript dominate.
+                  </p>
+                  <p>
+                    We also seperate the repos by languages.
+                    Interestingly, Haskell dominates in several fields such branches_count, commits_count, contributors_count and pull_requests_count. Almost every Haskell repository has a homepage, downloads and a wiki as well as open issues. Perhaps the language is a bit difficult to follow so having extra resources would be helpful to become popular. JavaScript and Java repos get the most stars while C++ and C# receive the least. Golang has the most contributors; it is definitely an up-and-coming language and popular among the open-source community. Java repositories have the largest code base. This is expected as the language itself is extremely verbose.
+                  </p>
+                  <h3> Miscellaneous</h3>
+                  <p>Below are just some miscellaneous fun things we found in this dataset.</p>
+                  <p>
+                    We noticed that popular repositories that contain code are hard to make commits to because they are already very built out. Some of these popular projects were products that were open sourced by companies, with no active record of commits on GitHub while they were in the beginning stages. Adding code to these projects is difficult because they are more stable versions. This is given by looking at the trend in branches that are created, forks, commit history, and open pull requests.
+On analyzing contributor count, we noticed the majority of popular repositories that contained code had less than 100 unique contributors, while a majority of repositories that did not contain code had less than 200 unique contributors. This trend is explained by the fact that contributing to repositories with code is much harder and requires a significant amount of time and effort as compared to repositories with no code.
+Milestones are used to track progress on groups of issues or pull requests in a repository. There are on average 0 milestones for repositories with no code, and less than four milestones for repositories with code. Popular repositories have milestones that need to be met because they have a significant number of concurrent contributions. This is also the case for the number of projects.
+A majority of popular repositories that contain code have received less than 10,000 stars on GitHub. However, stars are mostly evenly distributred up to 20,000 stars for repositories with no code. This can be attributed to the lack in the total number of popular repositories with no code.
+                  </p>
+
+            </div>
+            <div class='col-lg-8 col-lg-offset-2'>
+              <a href="#play-ground" class="btn btn-circle page-scroll">
+                  <i class="fa fa-angle-double-down animated"></i>
+              </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="play-ground" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>Star Playground</h2>
+                <p>
+                  This is a playground for finding correlations.
+                   You can pick any two features from our dataset and see if
+                   there are anything interesting between these two features.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+          <form>
+            <div class="col-lg-4 col-lg-offset-2">
+              <label for="playground-attribute1">Attribute 1</label>
+              <select class="form-control form-control-lg" id='playground-attribute1'>
+                <option>branches_count</option>
+                <option>commits_count</option>
+                <option>contributors_count</option>
+                <option>forks_count</option>
+                <option>milestones_count</option>
+                <option>open_issues_count</option>
+                <option>pull_requests_count</option>
+                <option>release_count</option>
+                <option>size</option>
+                <option>stars_count</option>
+                <option>watchers_count</option>
+              </select>
+            </div>
+            <div class="col-lg-4">
+              <label for="playground-attribute2">Attribute 2</label>
+              <select class="form-control form-control-lg" id='playground-attribute2'>
+                <option>branches_count</option>
+                <option>commits_count</option>
+                <option>contributors_count</option>
+                <option>forks_count</option>
+                <option>milestones_count</option>
+                <option>open_issues_count</option>
+                <option>pull_requests_count</option>
+                <option>size</option>
+                <option>stars_count</option>
+                <option>watchers_count</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="row top30">
+          <div class="col-lg-8 col-lg-offset-2">
+            <a id='play-button' href=""class="btn btn-default btn-lg"><i class="fa fa-star-half-o" aria-hidden="true"></i>Play</a>
+          </div>
+        </div>
+        <div class="row top30">
+          <div class="col-lg-8 col-lg-offset-2" id="playground-img-container">
+            <!-- insert image here-->
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+              <a href="#takeaways" class="btn btn-circle page-scroll">
+                  <i class="fa fa-angle-double-down animated"></i>
+              </a>
             </div>
         </div>
     </section>
 
     <!-- Download Section -->
-    <section id="download" class="content-section text-center">
-        <div class="download-section">
+    <section id="takeaways" class="content-section text-center">
             <div class="container">
                 <div class="col-lg-8 col-lg-offset-2">
-                    <h2>Download Grayscale</h2>
-                    <p>You can download Grayscale for free on the preview page at Start Bootstrap.</p>
-                    <a href="http://startbootstrap.com/template-overviews/grayscale/" class="btn btn-default btn-lg">Visit Download Page</a>
+                  <h2>Takeaways</h2>
+                  <p>
+                    Originally, we wanted to find what makes a repo popular. However, when we collected the data, we mistakenly obtained only the popular repos and ignored the normal repos. Hence, our data were skewed toward the popular ones so we couldn't do any analysis on the difference between these two worlds. Secondly, we realized that collecting data was one of the biggest challenges in data science. Data are very valuable and most places set lots of limitations on how much data we could obtain from them (such as the GitHub rate limit).
+                  </p>
                 </div>
             </div>
-        </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="container content-section text-center">
+    <section id="contact" class="container content-section text-center download-section">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-                <h2>Contact Start Bootstrap</h2>
-                <p>Feel free to email us to provide some feedback on our templates, give us suggestions for new templates and themes, or to just say hello!</p>
-                <p><a href="mailto:feedback@startbootstrap.com">feedback@startbootstrap.com</a>
+                <h2>Want to learn More?</h2>
+                <p>
+                  You can check out the following sources to learn more about this project.
                 </p>
                 <ul class="list-inline banner-social-buttons">
                     <li>
-                        <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                        <a href="https://github.com/him229/star-wars" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
                     </li>
                     <li>
-                        <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                        <a href="https://github.com/him229/star-wars" class="btn btn-default btn-lg"><i class="fa fa-book fa-fw"></i> <span class="network-name">iPython Notebook</span></a>
                     </li>
                     <li>
-                        <a href="https://plus.google.com/+Startbootstrap/posts" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
+                        <a href="https://github.com/him229/star-wars" class="btn btn-default btn-lg"><i class="fa fa-youtube fa-fw"></i> <span class="network-name">YouTube</span></a>
                     </li>
                 </ul>
             </div>
@@ -101,12 +286,11 @@
     </section>
 
     <!-- Map Section -->
-    <div id="map"></div>
 
     <!-- Footer -->
     <footer>
         <div class="container text-center">
-            <p>Copyright &copy; Your Website 2016</p>
+            <p>Copyright &copy; Star Wars 2016</p>
         </div>
     </footer>
 
@@ -125,6 +309,32 @@
     <!-- Theme JavaScript -->
     <script src="js/grayscale.min.js"></script>
 
+    <script>
+        $("#play-button").click(function (event)  {
+            event.preventDefault();
+
+            attr1 = document.getElementById("playground-attribute1");
+            attr2 = document.getElementById("playground-attribute2");
+
+            value1 = attr1.options[attr1.selectedIndex].text;
+            value2 = attr2.options[attr2.selectedIndex].text;
+
+            $.post("https://limitless-everglades-24690.herokuapp.com/plot",
+            {
+                attr1: value1,
+                attr2: value2
+            },
+            function(data, status) {
+		//data = JSON.parse(data);
+                iframeUrl = data.url;
+                $('#playground-img-container').html("<iframe width=\"700\" height=\"500\" src= " + iframeUrl + "/></iframe>");
+
+		console.log(data);
+
+            });
+
+       });
+    </script>
 </body>
 
 </html>
