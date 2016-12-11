@@ -161,7 +161,7 @@ But what are the most unpopular languages used by the popular repos?</p>
                     <img src='./img/language2.png'></img>
                   </div>
                   <p>
-                    we can clearly see that most of those popular repos must have something to do with websites since the web languages such as HTML, CSS and JavaScript dominate.
+                    We can clearly see that most of those popular repos must have something to do with websites since the web languages such as HTML, CSS and JavaScript dominate.
                   </p>
                   <p>
                     We also seperate the repos by languages.
@@ -250,7 +250,6 @@ A majority of popular repositories that contain code have received less than 10,
 
     <!-- Download Section -->
     <section id="takeaways" class="content-section text-center">
-        <div class="download-section">
             <div class="container">
                 <div class="col-lg-8 col-lg-offset-2">
                   <h2>Takeaways</h2>
@@ -259,11 +258,10 @@ A majority of popular repositories that contain code have received less than 10,
                   </p>
                 </div>
             </div>
-        </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="container content-section text-center">
+    <section id="contact" class="container content-section text-center download-section">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>Want to learn More?</h2>
@@ -319,10 +317,10 @@ A majority of popular repositories that contain code have received less than 10,
             value1 = attr1.options[attr1.selectedIndex].text;
             value2 = attr2.options[attr2.selectedIndex].text;
 
-            $.post("https://limitless-everglades-24690.herokuapp.com/plot", 
+            $.post("https://limitless-everglades-24690.herokuapp.com/plot",
             {
                 attr1: value1,
-                attr2: value2         
+                attr2: value2
             },
             function(data, status) {
 		//data = JSON.parse(data);
@@ -332,7 +330,7 @@ A majority of popular repositories that contain code have received less than 10,
 		console.log(data);
 
             });
-         
+
        });
     </script>
 </body>

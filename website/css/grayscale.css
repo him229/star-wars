@@ -219,6 +219,7 @@ a:focus {
 }
 .content-section {
   padding-top: 100px;
+  background-image: url('../img/background.jpg');
 }
 .download-section {
   width: 100%;
