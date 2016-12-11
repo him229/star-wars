@@ -263,15 +263,15 @@
                 attr2: value2         
             },
             function(data, status) {
-		data = JSON.parse(data);
+		//data = JSON.parse(data);
                 iframeUrl = data.url;
                 $('#playground-img-container').html("<iframe width=\"700\" height=\"500\" src= " + iframeUrl + "/></iframe>");
 
+		console.log(data);
 
             });
          
        });
-
     </script>
 </body>
 
