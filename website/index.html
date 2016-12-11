@@ -143,11 +143,6 @@
                 <option>commits_count</option>
                 <option>contributors_count</option>
                 <option>forks_count</option>
-                <option>has_downloads</option>
-                <option>has_homepage</option>
-                <option>has_issues</option>
-                <option>has_pages</option>
-                <option>has_wiki</option>
                 <option>milestones_count</option>
                 <option>open_issues_count</option>
                 <option>pull_requests_count</option>
@@ -155,7 +150,6 @@
                 <option>size</option>
                 <option>stars_count</option>
                 <option>watchers_count</option>
-                <option>is_legit</option>
               </select>
             </div>
             <div class="col-lg-4">
@@ -165,19 +159,12 @@
                 <option>commits_count</option>
                 <option>contributors_count</option>
                 <option>forks_count</option>
-                <option>has_downloads</option>
-                <option>has_homepage</option>
-                <option>has_issues</option>
-                <option>has_pages</option>
-                <option>has_wiki</option>
                 <option>milestones_count</option>
                 <option>open_issues_count</option>
                 <option>pull_requests_count</option>
-                <option>release_count</option>
                 <option>size</option>
                 <option>stars_count</option>
                 <option>watchers_count</option>
-                <option>is_legit</option>
               </select>
             </div>
           </form>
@@ -260,6 +247,32 @@
     <!-- Theme JavaScript -->
     <script src="js/grayscale.min.js"></script>
 
+    <script>
+        $("#play-button").click(function (event)  {
+            event.preventDefault();
+
+            attr1 = document.getElementById("playground-attribute1");
+            attr2 = document.getElementById("playground-attribute2");
+
+            value1 = attr1.options[attr1.selectedIndex].text;
+            value2 = attr2.options[attr2.selectedIndex].text;
+
+            $.post("https://limitless-everglades-24690.herokuapp.com/plot", 
+            {
+                attr1: value1,
+                attr2: value2         
+            },
+            function(data, status) {
+		data = JSON.parse(data);
+                iframeUrl = data.url;
+                $('#playground-img-container').html("<iframe width=\"700\" height=\"500\" src= " + iframeUrl + "/></iframe>");
+
+
+            });
+         
+       });
+
+    </script>
 </body>
 
 </html>
