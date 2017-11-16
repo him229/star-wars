@@ -43,7 +43,6 @@
                     <div class="col-md-8 col-md-offset-2">
                         <h1 class="brand-heading text-stroke">Star <i class="fa fa-star" aria-hidden="true"></i> Wars</h1>
                         <h1 class="brand-heading text-stroke" style="text-transform: none; font-size: 40px;">An Analysis of Popular GitHub Repositories</h1>
-                        <p class="intro-text" style="font-size: 20px;">By Ellen Stanfill, Himank Yadav, Juliang Li, Rafa Moreno</p>
                         <a href="#about" class="btn btn-circle page-scroll">
                             <i class="fa fa-angle-double-down animated"></i>
                         </a>
@@ -60,19 +59,19 @@
                 <h2>About Star Wars</h2>
                 <p>
                   We aim to analyze popular GitHub repositories and find the
-                  common traits and correlations with different parameters among
+                  common traits and correlations with different parameters amongst
                   them.
                 </p>
                 <p>
-                  Contributions in open source have really moved forward with
-                  platforms like Github and bitbucket. This recent trend has
-                  allowed for large databases that run software programs to
-                  be published openly, and also allows for people from all over
-                  the world to contribute to the code base. With Open Source
+                  Contributions in open-source have really moved forward with
+                  platforms like Github and Bitbucket. This recent trend has
+                  allowed for projects and software programs to
+                  be published openly and enabled people from all over
+                  the world to contribute to them. With Open-source
                   being so prevalent in the technology culture, we decided to
-                  analyze some of the most popular Github profiles to find
-                  trends that might help provoke what makes these projects
-                  so popular, and also find trends in technologies that
+                  analyze some of the most popular Github repositories to find
+                  trends that might help understand what makes these projects
+                  so popular, in addition to analyzing trends in technologies that
                   software engineers are using these days.
                 </p>
                 <a href="#data-collection" class="btn btn-circle page-scroll">
@@ -87,19 +86,19 @@
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>Data Collection</h2>
                 <p>
-                  We initially used the API provided by GitHub to get the data. However, the limited rate per hour quickly became problematic for us.
+                  We initially used the API provided by GitHub to get data. However, the limited rate per hour quickly became problematic for us.
                 </p>
                 <p>
-                  In order to avoid the rate limited problem, we used beautifulsoup to scrape the GitHub repository pages to get the relevant data we needed.
+                  In order to avoid the rate limit problem, we used beautifulsoup to scrape GitHub repository pages to get relevant data we needed.
                 </p>
                 <p>
-                  Web scraping in one machine for large amount of data is not feasible. Hence, we leveraged Google Cloud platform to distribute the loads and used Twillio API to notify us when something happened while the processes were running in the cloud.
+                  Web scraping in one machine for large amounts of data is not feasible. Hence, we leveraged Google Cloud platform to distribute the load and used Twillio API to notify us when something happened while the processes were running in the cloud.
                 </p>
                 <p>
                   After that, we had data in many separated files. To ease our analysis effort, we combined them into one single JSON file.
                 </p>
                 <p>
-                  Now we have the data, it's time to clean it up. This dataset contains lots of outliers. For example, the Linux repository is one of the most popular and most well-known code bases. However, it has infinitely many contributors and can mess with our analysis. Therefore, we try to single out all the outliers. This cuts the number of repositories almost by half.
+                  Now we had the data, it was time to clean it up. This dataset contains lots of outliers. For example, the Linux repository is one of the most popular and most well-known code bases. However, it has infinitely many contributors and can mess with our analysis. Therefore, we tried to single out all outliers. This cut the number of repositories almost by half.
                 </p>
                 <a href="#data-Analysis" class="btn btn-circle page-scroll">
                     <i class="fa fa-angle-double-down animated"></i>
@@ -114,11 +113,10 @@
                 <h2>Data Analysis</h2>
                 <h3>Legitness</h3>
                   <p>
-                    GitHub is supposed to be an open-source code sharing platform. However, we found that lots of popular repositories don't even contain a single line of code. Most of them are tutorials or best practices for certain frameworks or languages. We think these repos are still very valuable but we believe there must be some traits these repos have that the actual code-based repos don't. Therefore, we want to investigate this issue.
+                    GitHub is supposed to be an open-source code sharing platform. However, we found that lots of popular repositories don't even contain a single line of code. Most of them are tutorials or best practices for certain frameworks or languages. We thought these repositories are still very valuable and believed there must be some traits these repositories have that the actual code-based repositories don't. Therefore, we wanted to investigate this issue.
                   </p>
                   <p>
-                    It turns out that
-                    There are  492  repos that contain code and 41  repos that don't have a single line of code.
+                    It turns out that there are 492 repositories that contain code and 41 repositories that don't have a single line of code.
                   </p>
                   <div class='white-container'>
                     <img src='./img/legit1.png'></img>
@@ -126,24 +124,22 @@
                   <div class='white-container'>
                     <img src='./img/legit2.png'></img>
                   </div>
-                  <br>
                   <p>
-                    Based on our analysis, there are lots of differences between repos that contain code (legit repos) and repos that don't (non-legit repos). For instance, legit repos have more than twice as many branches and commits. In addition to those, legit repos have more than 3 times as many open issues and milestones. Non-legit repos have far smaller sizes than legit repos, since most of them only have texts or links to other contents. Nonetheless, on average, non-legit repos do receive slightly more attention than the legit ones as they have more stars/watchers.
+                    Based on our analysis, there are lots of differences between repositories that contain code (legit repositories) and repositories that don't (non-legit repos). For instance, legit repositorieshave more than twice as many branches and commits. In addition to those, legit repositorieshave more than 3 times as many open issues and milestones. Non-legit repositories have far smaller sizes than legit repos, since most of them only have texts or links to other contents. Nonetheless, on average, non-legit repositories do receive slightly more attention than the legit ones as they have more stars/watchers.
                   </p>
                   <p>
-                    There are distinct differences in the repos based on the legitness, so we built a decision tree classifier to help us determine if a repo is legit or not.
+                    There are distinct differences in the repositories based on the legitness, so we built a decision tree classifier to help us determine if a repository is legit or not.
                     We used half the dataset as training set and the other half as testing set. Our model was able to
-                    predict 243  out of  266  repositories correctly with score = 0.910112359551.
+                    predict 243 out of 266 repositories correctly with score = 0.910112359551.
                   </p>
                   <h3>Languages</h3>
-                    <p>We are interested in knowing what languages these popular repos use to see if choosing the primary languages for a repo is important to the stars count. First, we will investigate the primary languages of each repository - that is, the language which composes the largest percentage of the code in each repository.</p>
+                    <p>We are interested in knowing what languages these popular repositories use to see if choosing the primary languages for a repository is important to the stars count. First, we will investigate the primary languages of each repository - that is, the language which composes the largest percentage of the code in each repository.</p>
                   <div class='white-container'>
                     <img src='./img/language1.png'></img>
                   </div>
-                  <br>
-                  <p>Javascript is the most popular primary language used by all the repos in the dataset. 47.6% of repos use mostly Javascript. All of the top 10 languages are fairly well-known and widespread in academia and industry. This is expected, as people would contribute or look at repos written in common languages.
-But what are the most unpopular languages used by the popular repos?</p>
-                  <p>Most unpopular languages used by popular repos are </p>
+                  <p>Javascript is the most popular primary language used by all the repositories in the dataset. 47.6% of repositories use mostly Javascript. All of the top 10 languages are fairly well-known and widespread in academia and industry. This is expected, as people would contribute or look at repositories written in common languages.
+But what are the most unpopular languages used by the popular repositories?</p>
+                  <p>Most unpopular languages used by popular repositories are </p>
                     <p>1.Haskell</br>
                       2.Batchfile</br>
                       3.Crystal</br>
@@ -157,18 +153,17 @@ But what are the most unpopular languages used by the popular repos?</p>
                     </p>
                   <p>
                     Unsurprisingly, the pure, lazy and functional language Haskell takes the crown of being the least popular language.
-                    What are the top frequently used languages by popular repos?
+                    What are the top frequently used languages by popular repositories?
                   </p>
                   <div class='white-container'>
                     <img src='./img/language2.png'></img>
                   </div>
-                  <br>
                   <p>
-                    We can clearly see that most of those popular repos must have something to do with websites since the web languages such as HTML, CSS and JavaScript dominate.
+                    We can clearly see that most of those popular repositories must have something to do with websites since web languages such as HTML, CSS and JavaScript dominate.
                   </p>
                   <p>
-                    We also seperate the repos by languages.
-                    Interestingly, Haskell dominates in several fields such branches_count, commits_count, contributors_count and pull_requests_count. Almost every Haskell repository has a homepage, downloads and a wiki as well as open issues. Perhaps the language is a bit difficult to follow so having extra resources would be helpful to become popular. JavaScript and Java repos get the most stars while C++ and C# receive the least. Golang has the most contributors; it is definitely an up-and-coming language and popular among the open-source community. Java repositories have the largest code base. This is expected as the language itself is extremely verbose.
+                    We also seperate the repositories by languages.
+                    Interestingly, Haskell dominates in several fields such branches_count, commits_count, contributors_count and pull_requests_count. Almost every Haskell repository has a homepage, downloads and a wiki as well as open issues. Perhaps the language is a bit difficult to follow so having extra resources would be helpful to become popular. JavaScript and Java repositories get the most stars while C++ and C# receive the least. Golang has the most contributors; it is definitely an up-and-coming language and popular among the open-source community. Java repositories have the largest code base. This is expected as the language itself is extremely verbose.
                   </p>
                   <h3> Miscellaneous</h3>
                   <p>Below are just some miscellaneous fun things we found in this dataset.</p>
@@ -189,10 +184,7 @@ A majority of popular repositories that contain code have received less than 10,
     </section>
 
     <section id="play-ground" class="container content-section text-center">
-    <div class="container" style= "border: thin solid white">
         <div class="row">
-            <br>
-            <br>
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>Star Playground</h2>
                 <p>
@@ -237,7 +229,6 @@ A majority of popular repositories that contain code have received less than 10,
             </div>
           </form>
         </div>
-        <br>
         <div class="row top30">
           <div class="col-lg-8 col-lg-offset-2">
             <a id='play-button' href=""class="btn btn-default btn-lg"><i class="fa fa-star-half-o" aria-hidden="true"></i>Play</a>
@@ -248,14 +239,13 @@ A majority of popular repositories that contain code have received less than 10,
             <!-- insert image here-->
           </div>
         </div>
-        </div>
-
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
               <a href="#takeaways" class="btn btn-circle page-scroll">
                   <i class="fa fa-angle-double-down animated"></i>
               </a>
             </div>
+        </div>
     </section>
 
     <!-- Download Section -->
@@ -264,7 +254,7 @@ A majority of popular repositories that contain code have received less than 10,
                 <div class="col-lg-8 col-lg-offset-2">
                   <h2>Takeaways</h2>
                   <p>
-                    Originally, we wanted to find what makes a repo popular. However, when we collected the data, we mistakenly obtained only the popular repos and ignored the normal repos. Hence, our data were skewed toward the popular ones so we couldn't do any analysis on the difference between these two worlds. Secondly, we realized that collecting data was one of the biggest challenges in data science. Data are very valuable and most places set lots of limitations on how much data we could obtain from them (such as the GitHub rate limit).
+                    Originally, we wanted to find what makes a repository popular. However, when we collected data, we pivoted and obtained only the popular repositories and ignored the normal repositories. Hence, our data was skewed toward popular ones so we couldn't do any analysis on the difference between the two kinds of repositories. Secondly, we realized that collecting data is one of the biggest challenges in data science. Data is very valuable and most places set lots of limitations on how much data we could obtain from them (such as the GitHub rate limit).
                   </p>
                 </div>
             </div>
@@ -283,14 +273,13 @@ A majority of popular repositories that contain code have received less than 10,
                         <a href="https://github.com/him229/star-wars" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
                     </li>
                     <li>
-                        <a href="https://github.com/him229/star-wars/blob/master/index.ipynb" class="btn btn-default btn-lg"><i class="fa fa-book fa-fw"></i> <span class="network-name">ipython notebook</span></a>
-                    </li>                    
+                        <a href="https://github.com/him229/star-wars" class="btn btn-default btn-lg"><i class="fa fa-book fa-fw"></i> <span class="network-name">iPython Notebook</span></a>
+                    </li>
                     <li>
-                        <a href="https://youtu.be/6BqfVpkkPfE" class="btn btn-default btn-lg"><i class="fa fa-youtube fa-fw"></i> <span class="network-name">YouTube</span></a>
+                        <a href="https://github.com/him229/star-wars" class="btn btn-default btn-lg"><i class="fa fa-youtube fa-fw"></i> <span class="network-name">YouTube</span></a>
                     </li>
                 </ul>
             </div>
-        </div>
         </div>
     </section>
 
